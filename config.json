@@ -1,0 +1,93 @@
+{
+  "_comment_coins": "ADD or REMOVE coins here. All must be valid Bybit spot pairs priced between min_price_usd and max_price_usd.",
+  "coins": [
+    "DOGE/USDT",
+    "ADA/USDT",
+    "TRX/USDT",
+    "XLM/USDT",
+    "VET/USDT",
+    "ALGO/USDT",
+    "HBAR/USDT",
+    "SAND/USDT",
+    "MANA/USDT",
+    "SEI/USDT",
+    "GALA/USDT",
+    "CHZ/USDT"
+  ],
+  "_comment_price_filter": "Bot skips coins whose price is outside this USD range at startup and each cycle.",
+  "price_filter": {
+    "min_price_usd": 0.001,
+    "max_price_usd": 2.0
+  },
+  "_comment_timeframe": "Primary candle timeframe for all strategies and regime detection. Options: 1m, 5m, 15m, 1h, 4h",
+  "timeframe": "15m",
+  "_comment_risk": "risk_per_trade_pct: % of capital risked per trade. max_drawdown_pct: emergency stop for the whole session.",
+  "risk_per_trade_pct": 1.5,
+  "min_risk_reward": 2.0,
+  "max_concurrent_trades": 5,
+  "max_drawdown_pct": 10.0,
+  "_comment_loop": "Seconds between each full scan cycle.",
+  "loop_interval_seconds": 60,
+  "_comment_regime": "Tune the regime detection thresholds.",
+  "regime": {
+    "adx_period": 14,
+    "adx_trend_thresh": 25.0,
+    "adx_range_thresh": 20.0,
+    "ma_fast_period": 20,
+    "ma_slow_period": 50,
+    "ma_sep_thresh_pct": 0.5,
+    "ma_flat_lookback": 5,
+    "ma_flat_thresh_pct": 0.5,
+    "price_lookback": 5,
+    "range_lookback": 20
+  },
+  "_comment_grid": "Grid activates only when regime=RANGING and no position is open.",
+  "grid": {
+    "enabled": true,
+    "num_levels": 10,
+    "lookback_bars": 50,
+    "risk_per_level_pct": 0.3,
+    "grid_max_loss_pct": 5.0,
+    "level_tolerance_pct": 0.002
+  },
+  "_comment_strategies": "Each strategy can be individually enabled/disabled.",
+  "strategy_params": {
+    "breakout": {
+      "enabled": true,
+      "lookback_bars": 20,
+      "breakout_buffer_pct": 0.002,
+      "volume_factor": 1.5,
+      "consolidation_bars": 3,
+      "min_rr": 2.0
+    },
+    "trend": {
+      "enabled": true,
+      "ma_fast": 10,
+      "ma_slow": 50
+    },
+    "momentum": {
+      "enabled": true,
+      "rsi_period": 14,
+      "rsi_buy_threshold": 52,
+      "rsi_sell_threshold": 48
+    },
+    "volume_spike": {
+      "enabled": true,
+      "volume_ma_period": 20,
+      "volume_multiplier": 2.0
+    },
+    "mean_reversion": {
+      "enabled": true,
+      "bb_period": 20,
+      "bb_std": 2.0,
+      "rsi_period": 14,
+      "rsi_oversold": 30,
+      "rsi_overbought": 70
+    }
+  },
+  "_comment_exchange": "Set BYBIT_API_KEY and BYBIT_API_SECRET as environment variables. testnet=true for paper trading.",
+  "exchange": {
+    "name": "bybit",
+    "testnet": true
+  }
+}
