@@ -30,6 +30,10 @@ except ImportError:
 import pandas as pd
 from pydantic import BaseModel, Field
 
+logger = logging.getLogger(__name__)
+STRATEGY_NAME = "Breakout"
+
+
 
 # ---------------------------------------------------------------------------
 # Output model
